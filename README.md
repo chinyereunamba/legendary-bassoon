@@ -34,8 +34,8 @@ Users should be able to:
 
 ### Links
 
-- Solution URL: [Add solution URL here](https://github.com/chinyereunamba/legendary-bassoon)
-- Live Site URL: [Add live site URL here](https://delicate-churros-41c117.netlify.app/)
+- Solution URL: [Github](https://github.com/chinyereunamba/legendary-bassoon)
+- Live Site URL: [View site](https://delicate-churros-41c117.netlify.app/)
 
 ## My process
 
