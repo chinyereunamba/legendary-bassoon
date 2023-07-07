@@ -29,13 +29,12 @@
           </ul>
           <div class="form">
             <form action="">
-              <label for="email">Email address</label>
-              <input type="email" name="email" id="email" placeholder="email@company.com">
-              
-              <div>
-                <small class="error">This field cannot be null</small>
+              <label for="email">
+                <span>Email address</span>
+                <span class="error">Valid email required</span>
+              </label>
+              <input onkeyup=check() type="email" name="email" id="email" placeholder="email@company.com">
 
-              </div>
               <input type="button" value="Subscribe to monthly newsletter" id="btn">
             </form>
           </div>
@@ -57,7 +56,6 @@
     </div>
   </main>
 
-  
   <script>
     const email = document.getElementById('email')
     const btn = document.getElementById('btn')
@@ -66,31 +64,38 @@
     const msg = document.querySelector('.message')
     const msgContent = document.querySelector('.message p')
     const dismiss = document.querySelector('.message button')
-    
-    
-    btn.addEventListener('click', () => {
-      var validRegex = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
-      m = email.value
-      if (email.value == '') {
+
+
+    var validRegex = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
+    let emailAddress = email.value
+    function check() {
+      let emailAddress = email.value
+      if (emailAddress.value == "") {
+        error.style = 'display:none'
+        email.classList.remove('error')
+      } else if (!emailAddress.match(validRegex)) {
         error.style = 'display:block'
+        email.classList.add('error')
+      } else {
+        error.style = 'display:none'
+        email.classList.remove('error')
       }
-      else if (!email.value.match(validRegex)) {
-        error.innerText = 'Invalid email'
-        error.style = 'display:block'
-      } else{
-      
+    }
+    btn.addEventListener('click', () => {
+      let emailAddress = email.value
+      if (email.value.match(validRegex)) {
         form.style = 'display: none'
         msg.style = 'display: flex'
-        msgContent.innerHTML = "A confirmation email has been sent to <b>" + m +".</b> Please open it and click the button inside to confirm your subscription."
+        msgContent.innerHTML = `A confirmation email has been sent to <b>${emailAddress}.</b> Please open it and click the button inside to confirm your subscription.`
+      } else {
+        msg.style.display = 'none'
+        form.style.display = 'flex'
       }
     })
-    dismiss.addEventListener('click', ()=>{
+    dismiss.addEventListener('click', () => {
       form.style = 'display: flex'
       msg.style = 'display: none'
       email.value = ""
-    })
-    email.addEventListener('keypress', ()=>{
-      error.style = 'display:none'
     })
   </script>
 </body>
